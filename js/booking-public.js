@@ -767,9 +767,9 @@ async function sendTelegramBookingAlert(b) {
     // Abaikan kegagalan relative fetch dan coba endpoint VPS publik
   }
 
-  // 2. Coba endpoint VPS gateway FRDR (vps.link2bio.my.id)
+  // 2. Coba endpoint VPS gateway FRDR (api.frdrgarage.com)
   try {
-    const vpsRes = await fetch('https://vps.link2bio.my.id/api/send-telegram', {
+    const vpsRes = await fetch('https://api.frdrgarage.com/api/send-telegram', {
       method: 'POST',
       headers,
       body: payload
