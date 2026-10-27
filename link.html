@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FRDR GARAGE (@frdrgarage) — Official Links</title>
+  <meta name="description" content="Official Bio Link FRDR Garage Sleman. Booking Servis Online, Konsultasi WhatsApp, TikTok, dan Instagram Resmi.">
+  <meta property="og:title" content="FRDR GARAGE (@frdrgarage) — Official Links">
+  <meta property="og:description" content="Servis Ringan & Berat | Custom Part & PNP | Boreup & Tune Up | Vaporblasting | Restorasi & Painting">
+  <meta property="og:image" content="/logo.png">
+  <link rel="icon" href="/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0c;
+      --card-bg: rgba(22, 24, 29, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(35, 39, 48, 0.95);
+      --primary: #ff5722;
+      --primary-glow: rgba(255, 87, 34, 0.25);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --verified: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255, 87, 34, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-w: 480px;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Profile Header */
+    .avatar-wrapper {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #14161b;
+      border: 3px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-glow);
+    }
+
+    .profile-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .badge-verified {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #fbbf24, #d97706);
+      color: #000;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    }
+
+    .handle {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .bio {
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #d1d5db;
+      margin-bottom: 26px;
+      padding: 0 8px;
+      font-weight: 400;
+    }
+
+    /* Links Stack */
+    .links-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .link-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .link-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .link-card:active {
+      transform: scale(0.98);
+    }
+
+    .link-card.featured {
+      border: 1.5px solid rgba(255, 87, 34, 0.6);
+      background: linear-gradient(135deg, rgba(255, 87, 34, 0.12), rgba(22, 24, 29, 0.95));
+      box-shadow: 0 0 25px rgba(255, 87, 34, 0.18), 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .link-card.featured:hover {
+      border-color: rgba(255, 87, 34, 0.9);
+      box-shadow: 0 0 30px rgba(255, 87, 34, 0.3), 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .link-card.featured .icon-box {
+      background: rgba(255, 87, 34, 0.2);
+      border-color: rgba(255, 87, 34, 0.4);
+      color: #ff784e;
+    }
+
+    .link-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .link-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-featured {
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 87, 34, 0.2);
+      color: #ff8a65;
+      border: 1px solid rgba(255, 87, 34, 0.4);
+    }
+
+    .link-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .link-arrow {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .link-card:hover .link-arrow {
+      color: #fff;
+      transform: translate(2px, -2px);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .footer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="avatar-wrapper">
+      <img src="/logo.png" alt="FRDR GARAGE" class="avatar">
+    </div>
+    
+    <h1 class="profile-title">
+      FRDR GARAGE
+      <span class="badge-verified" title="Official Verified Garage">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </span>
+    </h1>
+    
+    <p class="handle">@frdrgarage • Sleman, Yogyakarta</p>
+    
+    <p class="bio">
+      SERVIS RINGAN &amp; BERAT • CUSTOM PART &amp; PNP • BOREUP &amp; TUNE UP • VAPORBLASTING &amp; POWDER COATING • RESTORASI ORI &amp; MODIFIKASI • PAINTING
+    </p>
+
+    <!-- Links List -->
+    <div class="links-stack">
+
+      <!-- Booking Servis (Featured) -->
+      <a href="https://frdrgarage.com/#booking" class="link-card featured">
+        <div class="link-left">
+          <div class="icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">
+              BOOKING SERVIS ONLINE
+              <span class="badge-featured">PRIORITAS</span>
+            </div>
+            <div class="link-subtitle">Reservasi slot servis &amp; cek antrean bengkel</div>
+          </div>
+        </div>
+        <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+
+      <!-- WhatsApp Official -->
+      <a href="https://wa.me/62881012368222?text=Halo%20FRDR%20Garage%2C%20saya%20ingin%20konsultasi%20mengenai%20servis%2Fpart." target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-left">
+          <div class="icon-box" style="color: #25d366; background: rgba(37, 211, 102, 0.1); border-color: rgba(37, 211, 102, 0.25);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">WHATSAPP OFFICIAL</div>
+            <div class="link-subtitle">+62 881-0123-68222 • Konsultasi Servis &amp; Part</div>
+          </div>
+        </div>
+        <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@frdr.garage" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-left">
+          <div class="icon-box" style="color: #00f2fe; background: rgba(0, 242, 254, 0.08); border-color: rgba(0, 242, 254, 0.2);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.87-4.49V8.62a8.28 8.28 0 0 0 3.9 1V6.69z"/>
+            </svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">TIKTOK RESMI</div>
+            <div class="link-subtitle">@frdr.garage • Konten harian &amp; hasil modifikasi</div>
+          </div>
+        </div>
+        <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/frdrgarage" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-left">
+          <div class="icon-box" style="color: #e1306c; background: rgba(225, 48, 108, 0.08); border-color: rgba(225, 48, 108, 0.2);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">INSTAGRAM</div>
+            <div class="link-subtitle">@frdrgarage • Portofolio restorasi &amp; repaint</div>
+          </div>
+        </div>
+        <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+
+      <!-- Lokasi Workshop (Google Maps) -->
+      <a href="https://frdrgarage.com/#contact" class="link-card">
+        <div class="link-left">
+          <div class="icon-box" style="color: #3b82f6; background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.2);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div class="link-info">
+            <div class="link-title">LOKASI WORKSHOP</div>
+            <div class="link-subtitle">Sleman, D.I. Yogyakarta • Jam Buka &amp; Rute</div>
+          </div>
+        </div>
+        <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-pill">
+        <span>FRDR GARAGE © 2026 • Official Ecosystem</span>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>
