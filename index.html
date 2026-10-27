@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>FRDR Garage — Modern Performance &amp; Precision Service</title>
+  <meta name="description" content="Layanan servis motor modern FRDR Garage. Booking servis online bebas antre, perawatan berkala, tune up, CVT treatment, bore up, dan home service panggilan.">
+  <meta name="keywords" content="FRDR Garage, bengkel motor, bengkel pnp, pnp, booking servis online, tune up, CVT treatment, bore up, home service, servis panggilan">
+  <meta name="theme-color" content="#000000">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FRDR Garage — Modern Performance &amp; Precision Service">
+  <meta property="og:description" content="Servis presisi, suku cadang 100% original, estimasi transparan, dan booking servis online bebas antre.">
+  <meta property="og:image" content="logo.png">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Anti-FOUC Theme Init (Runs before DOM render) -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('frdr_theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        } else {
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Typography: System Fonts & Inter fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+
+  <!-- ===================================================================
+       GLOBAL NAVIGATION
+       =================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#hero" class="brand-logo">
+        <img src="logo.png" alt="FRDR Garage Logo">
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#hero" class="nav-link active">Overview</a></li>
+        <li><a href="#layanan" class="nav-link">Layanan</a></li>
+        <li><a href="#keunggulan" class="nav-link">Keunggulan</a></li>
+        <li><a href="#booking" class="nav-link">Booking Online</a></li>
+        <li><a href="#lokasi" class="nav-link">Workshop</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <!-- Theme Toggle Button -->
+        <button type="button" class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Ganti Tema Gelap / Terang" title="Beralih ke Mode Terang">
+          ☀️
+        </button>
+
+        <a href="javascript:void(0)" id="navWaBtn" class="btn-pill-secondary" target="_blank" rel="noopener">
+          <span>Konsultasi WA</span>
+        </a>
+        <a href="#booking" class="btn-pill-primary">
+          <span>Booking Servis</span>
+        </a>
+      </div>
+
+      <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobileNav()">
+        ☰
+      </button>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav" id="mobileNav">
+      <ul class="mobile-nav-list">
+        <li><a href="#hero" class="mobile-nav-link" onclick="closeMobileNav()">Overview <span>→</span></a></li>
+        <li><a href="#layanan" class="mobile-nav-link" onclick="closeMobileNav()">Layanan Servis <span>→</span></a></li>
+        <li><a href="#keunggulan" class="mobile-nav-link" onclick="closeMobileNav()">Keunggulan Bengkel <span>→</span></a></li>
+        <li><a href="#booking" class="mobile-nav-link" onclick="closeMobileNav()">Booking Servis Online <span>→</span></a></li>
+        <li><a href="#lokasi" class="mobile-nav-link" onclick="closeMobileNav()">Workshop &amp; Jam Buka <span>→</span></a></li>
+      </ul>
+
+      <div class="mobile-theme-row" style="margin-top:16px; padding:12px 14px; background:var(--surface-card); border-radius:var(--radius-md); border:1px solid var(--hairline); display:flex; align-items:center; justify-content:space-between;">
+        <span style="font-size:13.5px; color:var(--text-white); font-weight:500;">Mode Tampilan</span>
+        <button type="button" class="theme-toggle-pill" id="mobileThemeToggleBtn" onclick="toggleTheme()">
+          <span class="mobile-theme-icon">☀️</span> <span class="mobile-theme-text">Terang</span>
+        </button>
+      </div>
+
+      <div style="margin-top:14px; display:flex; flex-direction:column; gap:10px;">
+        <a href="#booking" class="btn-pill-primary" style="justify-content:center; padding:10px;" onclick="closeMobileNav()">
+          Booking Servis Sekarang
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       HERO SECTION WITH WORKSHOP HIGHLIGHTS CARD
+       =================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Hero Text -->
+        <div class="hero-content">
+          <span class="hero-eyebrow">Precision Workshop &amp; Performance</span>
+          <h1 class="hero-title">
+            Servis Presisi.<br>
+            Transparan.<br>
+            Bebas Antre.
+          </h1>
+          <p class="hero-subtitle">
+            Standar pengerjaan mekanik andal, peralatan scanner mutakhir, suku cadang 100% original, dan reservasi jadwal servis online yang cepat dan mudah.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#booking" class="btn-hero-primary">
+              <span>Booking Servis Online</span>
+            </a>
+            <a href="javascript:void(0)" id="heroWaBtn" class="btn-hero-secondary" target="_blank" rel="noopener">
+              <span>Konsultasi WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="trust-strip">
+            <div class="trust-item" style="text-align:center;">
+              <span class="trust-val">★ ★ ★ ★ ★</span>
+              <span class="trust-label">Rating Kepuasan</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-val">100% Original</span>
+              <span class="trust-label">Suku Cadang Teruji</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-val">Home Service</span>
+              <span class="trust-label">Buka s/d 23:00 WIB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workshop Highlights Card -->
+        <div class="hero-card-side">
+          <div class="hero-profile-card">
+            <div class="profile-card-header">
+              <h3 class="profile-card-title">FRDR Garage Workshop</h3>
+              <p class="profile-card-subtitle">Perawatan Motor Terpadu</p>
+            </div>
+
+            <ul class="profile-highlights-list">
+              <li class="profile-highlight-item">
+                <span class="profile-highlight-icon">⚡</span>
+                <div>
+                  <strong>Fast Track Servis:</strong> Prioritas alokasi stall dan persiapan suku cadang lebih awal untuk pelanggan booking online.
+                </div>
+              </li>
+              <li class="profile-highlight-item">
+                <span class="profile-highlight-icon">🛠️</span>
+                <div>
+                  <strong>Diagnostik Scanner Komputer:</strong> Pengecekan sensor injeksi dan kelistrikan presisi tanpa tebak-tebakan.
+                </div>
+              </li>
+              <li class="profile-highlight-item">
+                <span class="profile-highlight-icon">🛡️</span>
+                <div>
+                  <strong>Garansi Resmi Pengerjaan:</strong> Jaminan servis tuntas untuk setiap unit dan garansi suku cadang orisinil.
+                </div>
+              </li>
+              <li class="profile-highlight-item">
+                <span class="profile-highlight-icon">🏠</span>
+                <div>
+                  <strong>Layanan Home Service:</strong> Kunjungan teknisi profesional langsung ke rumah Anda setiap hari hingga 23:00 WIB.
+                </div>
+              </li>
+            </ul>
+
+            <a href="#booking" class="btn-profile-cta">
+              <span>Jadwalkan Servis Sekarang →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SERVICES SHOWCASE
+       =================================================================== -->
+  <section class="section-py services-section" id="layanan">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Layanan Unggulan</span>
+        <h2 class="section-title">Perawatan Menyeluruh untuk Kendaraan Anda</h2>
+        <p class="section-desc">Pilihan perawatan berkala, restorasi, hingga peningkatan performa dengan estimasi biaya transparan dan garansi pengerjaan.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- 1. Servis Berkala -->
+        <div class="service-card">
+          <div class="service-icon-box">🔧</div>
+          <h3 class="service-title">Servis Berkala &amp; Tune Up</h3>
+          <p class="service-desc">Perawatan lengkap performa mesin injeksi / karburator agar tarikan enteng, irit bahan bakar, dan selalu bertenaga.</p>
+          <ul class="service-features">
+            <li>Gurah mesin &amp; carbon cleaner</li>
+            <li>Pembersihan injector / throttle body</li>
+            <li>Setel celah klep &amp; ganti busi</li>
+            <li>Ganti oli mesin &amp; oli gardan</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('Tune Up & Servis Berkala')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+
+        <!-- 2. CVT Treatment -->
+        <div class="service-card">
+          <div class="service-icon-box">⚡</div>
+          <h3 class="service-title">CVT Treatment Matic</h3>
+          <p class="service-desc">Solusi tuntas motor matic gredeg, tarikan lemot, dan getar pada putaran rendah. Pembersihan &amp; penggantian part orisinil.</p>
+          <ul class="service-features">
+            <li>Cuci &amp; degreaser blok CVT total</li>
+            <li>Ganti roller racing &amp; per torsi</li>
+            <li>Bubut derajat pulley (opsional)</li>
+            <li>Pembersihan kampas ganda &amp; belt</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('CVT Treatment & Anti Gredeg')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+
+        <!-- 3. Bore Up & Upgrade -->
+        <div class="service-card">
+          <div class="service-icon-box">🚀</div>
+          <h3 class="service-title">Bore Up &amp; Modifikasi Mesin</h3>
+          <p class="service-desc">Tingkatkan performa untuk harian, touring, hingga kompetisi dengan racikan matang, presisi, dan tetap awet tahan lama.</p>
+          <ul class="service-features">
+            <li>Paket Bore Up harian bergaransi</li>
+            <li>Porting polish flow bench</li>
+            <li>Noken as custom &amp; per klep jepang</li>
+            <li>Remap ECU &amp; setel AFR dyno</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('Bore Up & Upgrade Mesin')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+
+        <!-- 4. Kelistrikan & Diagnostik OBD -->
+        <div class="service-card">
+          <div class="service-icon-box">💡</div>
+          <h3 class="service-title">Kelistrikan &amp; Scanner OBD</h3>
+          <p class="service-desc">Deteksi kerusakan sensor injeksi secara akurat dengan scanner komputer, reset MIL error, dan instalasi kelistrikan rapi.</p>
+          <ul class="service-features">
+            <li>Diagnostik scanner injeksi OBD</li>
+            <li>Perbaikan spul, kiprok &amp; aki</li>
+            <li>Pemasangan lampu Biled projector</li>
+            <li>Wiring kabel bodi tahan panas</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('Kelistrikan & Diagnostik Scanner')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+
+        <!-- 5. Home Service -->
+        <div class="service-card">
+          <span class="badge-homeservice">Home Service</span>
+          <div class="service-icon-box">🏠</div>
+          <h3 class="service-title">Home Service (Panggilan)</h3>
+          <p class="service-desc">Mekanik profesional datang langsung ke rumah atau kantor Anda dengan perkakas lengkap. Praktis dan beroperasi hingga malam.</p>
+          <ul class="service-features">
+            <li>Layanan di rumah</li>
+            <li>Jam operasional 16:00 - 23:00 WIB</li>
+            <li>Ganti oli, tune up, rem &amp; aki</li>
+            <li>Jangkauan luas &amp; tepat waktu</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectHomeService()">
+            Pilih Home Service
+          </button>
+        </div>
+
+        <!-- 7. PNP (Plug and Play & Custom Fitting) -->
+        <div class="service-card">
+          <div class="service-icon-box">⚙️</div>
+          <h3 class="service-title">PNP &amp; Custom Part</h3>
+          <p class="service-desc">Pemasangan part modifikasi dan aftermarket lintas tipe motor secara presisi, rapi, center, dan aman dipakai harian.</p>
+          <ul class="service-features">
+            <li>PNP velg, arm &amp; USD lintas motor</li>
+            <li>Bracket kaliper &amp; piringan cakram</li>
+            <li>Bushing &amp; boshing bubut presisi</li>
+            <li>Pemasangan aksesori aftermarket</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('PNP & Custom Fitting Part')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+
+        <!-- 8. Restorasi Motor -->
+        <div class="service-card">
+          <div class="service-icon-box">✨</div>
+          <h3 class="service-title">Restorasi Total &amp; Detailing</h3>
+          <p class="service-desc">Kembalikan kondisi motor kesayangan maupun motor klasik Anda menjadi segar, prima, dan mulus seperti baru keluar dari dealer.</p>
+          <ul class="service-features">
+            <li>Restorasi mesin &amp; kelistrikan total</li>
+            <li>Peremajaan rangka &amp; bodi orisinil</li>
+            <li>Penggantian baut-baut &amp; karet baru</li>
+            <li>Detailing sela mesin &amp; kaki-kaki</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('Restorasi Motor')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+
+        <!-- 9. Cat Custom & Vaporblasting -->
+        <div class="service-card">
+          <div class="service-icon-box">🎨</div>
+          <h3 class="service-title">Cat Custom &amp; Vaporblasting</h3>
+          <p class="service-desc">Pengecatan bodi berkualitas tinggi dan pembersihan blok mesin dengan teknologi vaporblasting hingga bersih mengilap seperti baru.</p>
+          <ul class="service-features">
+            <li>Vaporblasting krengkes, head &amp; blok</li>
+            <li>Repaint full bodi &amp; velg oven</li>
+            <li>Cat custom, bunglon &amp; airbrush</li>
+            <li>Powder coating &amp; clear coat tebal</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('Cat Custom & Vaporblasting')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+
+        <!-- 10. Remap ECU & Tuning Injeksi -->
+        <div class="service-card">
+          <div class="service-icon-box">💻</div>
+          <h3 class="service-title">Remap ECU &amp; Tuning</h3>
+          <p class="service-desc">Optimasi pemetaan ECU standar maupun racing untuk membuka potensi tenaga mesin, respons gas lebih spontan, dan pembakaran presisi.</p>
+          <ul class="service-features">
+            <li>Remap ECU standar (Keihin / Shindengen)</li>
+            <li>Kalibrasi debit bensin (AFR) &amp; kurva pengapian</li>
+            <li>Open limiter RPM &amp; aktivasi fitur timing kuda</li>
+            <li>Setting ECU racing (Juken, aRacer, Uma, dll)</li>
+          </ul>
+          <button type="button" class="btn-service-action" onclick="quickSelectService('Remap ECU & Tuning Injeksi')">
+            Pilih Layanan Ini
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       WHY US & 4-STEP WORKFLOW
+       ===================================================================== -->
+  <section class="section-py why-section" id="keunggulan">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Nilai Utama Kami</span>
+        <h2 class="section-title">Standar Baru Bengkel Profesional</h2>
+        <p class="section-desc">Pengalaman servis modern dengan keterbukaan biaya, peralatan diagnostik presisi, dan kenyamanan reservasi online.</p>
+      </div>
+
+      <div class="why-us-grid">
+        <div class="why-card">
+          <div class="why-icon">🛠️</div>
+          <h3 class="why-title">Diagnostik Presisi</h3>
+          <p class="why-desc">Pemeriksaan sensor komputer dan kelistrikan modern untuk analisa akurat.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">💰</div>
+          <h3 class="why-title">Estimasi Jelas</h3>
+          <p class="why-desc">Rincian sparepart dan biaya jasa tercatat transparan di SPK sebelum pengerjaan.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🛡️</div>
+          <h3 class="why-title">Garansi Servis</h3>
+          <p class="why-desc">Pekerjaan servis dan suku cadang orisinil dilindungi garansi resmi bengkel.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🧑‍🔧</div>
+          <h3 class="why-title">Mekanik Andal</h3>
+          <p class="why-desc">Teknisi berpengalaman dan komunikatif yang siap mendengarkan keluhan Anda.</p>
+        </div>
+      </div>
+
+      <!-- 4 Langkah Alur Servis -->
+      <div class="workflow-container">
+        <div class="section-header" style="margin-bottom:32px;">
+          <h3 style="font-family:var(--font-display); font-size:22px; font-weight:600; color:var(--text-white);">Alur Servis Kendaraan</h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-top:4px;">Proses terstruktur demi hasil terbaik dan tepat waktu</p>
+        </div>
+
+        <div class="workflow-steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <h4 class="step-title">Booking / Datang</h4>
+            <p class="step-desc">Pesan jadwal online bebas antre atau datang langsung ke workshop.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <h4 class="step-title">Diagnosa &amp; SPK</h4>
+            <p class="step-desc">Pengecekan keluhan dan penerbitan estimasi biaya pengerjaan.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <h4 class="step-title">Pengerjaan Presisi</h4>
+            <p class="step-desc">Pengerjaan teliti oleh mekanik andal sesuai standar operasional bengkel.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <h4 class="step-title">Uji Kelayakan</h4>
+            <p class="step-desc">Quality control selesai, unit siap diambil dalam kondisi prima.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       BOOKING SERVIS ONLINE (PRIMARY ACTION)
+       ===================================================================== -->
+  <section class="section-py booking-section" id="booking">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Reservasi Cepat &amp; Praktis</span>
+        <h2 class="section-title">Booking Servis Online</h2>
+        <p class="section-desc">Pilih tanggal dan jam kedatangan atau minta teknisi datang ke rumah. Suku cadang dan stall disiapkan lebih awal.</p>
+      </div>
+
+      <div class="booking-card-wrapper">
+        <!-- Sub Navigation Tab -->
+        <div class="portal-nav">
+          <button type="button" class="nav-btn active" id="tabNewBookingBtn" onclick="switchPortalTab('form')">
+            Form Booking Baru
+          </button>
+          <button type="button" class="nav-btn" id="tabCheckStatusBtn" onclick="switchPortalTab('status')">
+            Cek Tiket Reservasi
+          </button>
+        </div>
+
+        <!-- VIEW 1: FORM BOOKING -->
+        <div id="portalFormView">
+          <div id="noDatesAlert" class="alert-box alert-warn" style="display:none;">
+            <div>⚠️</div>
+            <div>
+              <strong>Saat ini jadwal booking online sedang penuh atau belum dibuka.</strong><br>
+              Silakan hubungi bengkel langsung melalui WhatsApp untuk konsultasi atau servis langsung.
+            </div>
+          </div>
+
+          <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+            <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
+
+            <!-- Pilihan Layanan -->
+            <div class="form-group" style="margin-bottom:20px;">
+              <label>Pilihan Layanan Servis <span class="req">*</span></label>
+              <div class="mode-switch" id="bookingTypeSwitch">
+                <button type="button" class="type-btn active" data-type="workshop">
+                  🏢 Servis di Bengkel
+                </button>
+                <button type="button" class="type-btn" data-type="home_service">
+                  🏠 Home Service (Panggilan)
+                </button>
+              </div>
+              <input type="hidden" id="bookingType" value="workshop">
+            </div>
+
+            <div class="form-group">
+              <label for="bookingCustomerName">Nama Lengkap Pemilik <span class="req">*</span></label>
+              <input type="text" id="bookingCustomerName" class="input-control" placeholder="Contoh: Budi Santoso" required>
+            </div>
+
+            <div class="form-group">
+              <label for="bookingCustomerPhone">Nomor WhatsApp Aktif <span class="req">*</span></label>
+              <input type="tel" id="bookingCustomerPhone" class="input-control" placeholder="Contoh: 08123456789" required>
+            </div>
+
+            <!-- Home Service Fields -->
+            <div id="homeServiceFields" style="display:none; background:var(--surface-tile-1); border:1px solid var(--hairline); border-radius:var(--radius-md); padding:18px; margin-bottom:20px;">
+              <div style="font-size:13px; font-weight:600; color:var(--primary-on-dark); margin-bottom:12px;">
+                Lokasi Kunjungan Home Service
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label for="bookingCustomerAddress">Alamat Lengkap &amp; Patokan Rumah <span class="req">*</span></label>
+                <textarea id="bookingCustomerAddress" class="input-control" placeholder="Tuliskan nama jalan, nomor rumah, RT/RW, kelurahan, dan patokan rumah"></textarea>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label for="bookingMapsUrl">Tautan Google Maps / Shareloc WhatsApp <span style="font-size:12px; font-weight:normal; color:var(--text-dim);">(Opsional)</span></label>
+                <input type="url" id="bookingMapsUrl" class="input-control" placeholder="Tempel tautan https://maps.app.goo.gl/... jika ada">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bookingVehiclePlate">Plat Nomor Kendaraan <span class="req">*</span></label>
+                <input type="text" id="bookingVehiclePlate" class="input-control input-mono" placeholder="B 1234 XYZ" required>
+              </div>
+              <div class="form-group">
+                <label for="bookingVehicleModel">Tipe / Model Kendaraan <span class="req">*</span></label>
+                <input type="text" id="bookingVehicleModel" class="input-control" placeholder="Contoh: Vario 150 / Avanza" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bookingDateSelect"><span id="bookingDateLabel">Pilih Tanggal Booking</span> <span class="req">*</span></label>
+              <select id="bookingDateSelect" class="input-control" required style="font-weight:400;">
+                <option value="">-- Memuat jadwal bengkel... --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="bookingTimeSelect"><span id="bookingTimeLabel">Estimasi Jam Kedatangan</span> <span class="req">*</span></label>
+              <select id="bookingTimeSelect" class="input-control" required style="font-weight:400;">
+                <option value="">-- Pilih Tanggal Servis Terlebih Dahulu --</option>
+              </select>
+              <div id="bookingTimeHint" style="font-size:12px; color:var(--text-dim); margin-top:6px;">ℹ️ Pilih tanggal servis di atas untuk melihat jam kedatangan yang tersedia.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="bookingComplaint">Rencana Servis / Catatan Keluhan <span class="req">*</span></label>
+              <textarea id="bookingComplaint" class="input-control" placeholder="Jelaskan kebutuhan servis kendaraan Anda (misal: CVT gredeg, tarikan lemot, ganti oli sekalian cek rem)" required minlength="5"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnSubmitBooking">
+              <span>Kirim Booking Servis</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- VIEW 2: TIKET KONFIRMASI (SUKSES) -->
+        <div id="portalSuccessView" style="display:none;">
+          <div style="text-align:center; margin-bottom:20px;">
+            <div style="font-size:36px; margin-bottom:8px;">✅</div>
+            <h2 style="font-family:var(--font-display); font-size:20px; font-weight:600; color:var(--text-white);">Booking Berhasil Terkirim</h2>
+            <p style="font-size:13.5px; color:var(--text-muted); margin-top:2px;">
+              Simpan kode tiket berikut sebagai bukti reservasi servis Anda.
+            </p>
+          </div>
+
+          <div class="ticket-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span class="live-status-pill status-menunggu" id="ticketStatusBadge">Menunggu Konfirmasi</span>
+              <span style="font-size:12px; color:var(--text-dim);" id="ticketCreatedAt"></span>
+            </div>
+
+            <div class="ticket-code" id="ticketCode">BK-XXXXX</div>
+
+            <div class="ticket-row">
+              <span class="ticket-label">Layanan:</span>
+              <span class="ticket-val" id="ticketType">Servis di Bengkel</span>
+            </div>
+            <div class="ticket-row" id="ticketAddressRow" style="display:none;">
+              <span class="ticket-label">Alamat Kunjungan:</span>
+              <span class="ticket-val" id="ticketAddress" style="font-size:13px; color:var(--primary-on-dark);">-</span>
+            </div>
+            <div class="ticket-row" id="ticketMapsRow" style="display:none;">
+              <span class="ticket-label">Lokasi Maps:</span>
+              <span class="ticket-val" id="ticketMapsLink"></span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Jadwal Servis:</span>
+              <span class="ticket-val" id="ticketDate" style="color:var(--primary-on-dark);">-</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Jam Tiba:</span>
+              <span class="ticket-val" id="ticketTime">-</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Kendaraan:</span>
+              <span class="ticket-val" id="ticketVehicle">-</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Plat Nomor:</span>
+              <span class="ticket-val" id="ticketPlate" style="font-family:var(--font-mono);">-</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">Pemesan:</span>
+              <span class="ticket-val" id="ticketCustomer">-</span>
+            </div>
+            <div class="ticket-row">
+              <span class="ticket-label">No. WhatsApp:</span>
+              <span class="ticket-val" id="ticketPhone">-</span>
+            </div>
+
+            <div style="margin-top:12px; font-size:12px; color:var(--text-dim);">Keluhan / Rencana Servis:</div>
+            <div class="ticket-complaint-box" id="ticketComplaint">-</div>
+          </div>
+
+          <a href="javascript:void(0)" id="ticketWaBtn" class="btn-wa" target="_blank" rel="noopener">
+            <span>Konfirmasi via WhatsApp Sekarang</span>
+          </a>
+
+          <div style="margin-top:10px;">
+            <button type="button" class="btn-secondary" onclick="resetToNewBookingForm()">
+              + Buat Booking Lain
+            </button>
+          </div>
+        </div>
+
+        <!-- VIEW 3: CEK STATUS TIKET -->
+        <div id="portalStatusView" style="display:none;">
+          <h3 style="font-family:var(--font-display); font-size:18px; font-weight:600; color:var(--text-white); margin-bottom:4px;">Cek Tiket Reservasi</h3>
+          <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:20px;">
+            Masukkan kode tiket booking (contoh: <code>BK-261005-01</code>) atau nomor WhatsApp Anda.
+          </p>
+
+          <form id="checkStatusForm" onsubmit="handleCheckStatus(event)">
+            <div class="form-group">
+              <label for="searchQuery">Kode Booking atau No. WhatsApp</label>
+              <input type="text" id="searchQuery" class="input-control" placeholder="Contoh: BK-261005-01 atau 0812xxx" required>
+            </div>
+            <button type="submit" class="btn-submit" id="btnSearchStatus">
+              <span>Cari Tiket Booking</span>
+            </button>
+          </form>
+
+          <div id="searchResultArea" style="margin-top:20px; display:none;"></div>
+        </div>
+
+        <!-- VIEW 4: TELEGRAM CONFIRM VIEW -->
+        <div id="portalConfirmView" style="display:none; text-align:center;">
+          <div id="confirmLoadingBox" style="padding:32px 20px;">
+            <div class="spinner" style="width:32px; height:32px; margin:0 auto 14px; border:2px solid rgba(128,128,128,0.25); border-top-color:var(--primary-on-dark);"></div>
+            <div style="font-weight:600; font-size:16px; color:var(--text-white);">Memproses Konfirmasi Tiket...</div>
+            <div style="font-size:13px; color:var(--text-dim); margin-top:4px;">Menghubungkan ke database FRDR Garage</div>
+          </div>
+
+          <div id="confirmSuccessBox" style="display:none;">
+            <div style="font-size:42px; margin-bottom:10px;">✅</div>
+            <h2 style="font-family:var(--font-display); color:var(--success); font-size:21px; font-weight:600; margin-bottom:4px;">Booking Berhasil Dikonfirmasi</h2>
+            <p style="font-size:14px; color:var(--text-muted); margin-bottom:20px;">
+              Tiket ini telah dikonfirmasi dan sistem bengkel telah diperbarui secara realtime.
+            </p>
+
+            <div class="ticket-container" style="text-align:left; margin-bottom:18px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="live-status-pill status-selesai">Dikonfirmasi</span>
+                <span style="font-size:13px; color:var(--text-dim);" id="confirmTicketCode">-</span>
+              </div>
+              <div class="ticket-row"><span class="ticket-label">Layanan:</span><span class="ticket-val" id="confirmTicketType">-</span></div>
+              <div class="ticket-row"><span class="ticket-label">Pelanggan:</span><span class="ticket-val" id="confirmTicketCustomer">-</span></div>
+              <div class="ticket-row"><span class="ticket-label">No. WA:</span><span class="ticket-val" id="confirmTicketPhone">-</span></div>
+              <div class="ticket-row"><span class="ticket-label">Kendaraan:</span><span class="ticket-val" id="confirmTicketVehicle">-</span></div>
+              <div class="ticket-row"><span class="ticket-label">Jadwal:</span><span class="ticket-val" id="confirmTicketSchedule">-</span></div>
+              <div class="ticket-row" id="confirmAddressRow" style="display:none;"><span class="ticket-label">Alamat:</span><span class="ticket-val" id="confirmTicketAddress">-</span></div>
+              <div style="margin-top:12px; font-size:12px; color:var(--text-dim);">Keluhan:</div>
+              <div class="ticket-complaint-box" id="confirmTicketComplaint">-</div>
+            </div>
+
+            <a href="javascript:void(0)" id="confirmWaBtn" class="btn-wa" target="_blank" rel="noopener" style="margin-bottom:12px;">
+              <span>Kirim WA Konfirmasi ke Pelanggan</span>
+            </a>
+
+            <div>
+              <button type="button" class="btn-secondary" onclick="resetToNewBookingForm()">
+                Buka Halaman Utama Booking
+              </button>
+            </div>
+          </div>
+
+          <div id="confirmErrorBox" style="display:none; padding:20px;">
+            <div style="font-size:36px; margin-bottom:8px;">❌</div>
+            <h3 style="color:var(--danger); font-size:18px; margin-bottom:6px;">Gagal Mengonfirmasi Tiket</h3>
+            <p id="confirmErrorText" style="font-size:13.5px; color:var(--text-muted); margin-bottom:18px;">Tiket tidak ditemukan atau sudah dibatalkan.</p>
+            <button type="button" class="btn-secondary" onclick="resetToNewBookingForm()">
+              Buka Halaman Utama Booking
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       LOCATION, WORKSHOP & FAQ
+       ===================================================================== -->
+  <section class="section-py location-section" id="lokasi">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Workshop Bengkel</span>
+        <h2 class="section-title">Lokasi &amp; Jam Operasional</h2>
+        <p class="section-desc">Fasilitas workshop lengkap dengan ruang tunggu nyaman dan parkir aman.</p>
+      </div>
+
+      <div class="location-grid">
+        <div class="location-card">
+          <div class="location-info-row">
+            <div class="location-info-icon">📍</div>
+            <div class="location-info-content">
+              <h4>Alamat Workshop</h4>
+              <p id="shopLocationAddress">FRDR Garage — Bengkel Motor</p>
+            </div>
+          </div>
+
+          <div class="location-info-row">
+            <div class="location-info-icon">⏰</div>
+            <div class="location-info-content">
+              <h4>Jam Buka Bengkel</h4>
+              <p>Senin – Sabtu: 09:00 – 17:00 WIB</p>
+              <p style="color:var(--primary-on-dark); font-weight:600;">Jumat: 14.00 - 18.00 WIB</p>
+            </div>
+          </div>
+
+          <div class="location-info-row">
+            <div class="location-info-icon">🏠</div>
+            <div class="location-info-content">
+              <h4>Jam Home Service (Panggilan)</h4>
+              <p style="color:var(--primary-on-dark); font-weight:600;">Setiap Hari: 16:00 – 23:00 WIB</p>
+            </div>
+          </div>
+
+          <div class="location-info-row">
+            <div class="location-info-icon">📱</div>
+            <div class="location-info-content">
+              <h4>Kontak WhatsApp</h4>
+              <p id="shopLocationPhone">0812-3456-789</p>
+            </div>
+          </div>
+
+          <div style="margin-top:26px;">
+            <a href="javascript:void(0)" id="btnOpenMaps" class="btn-hero-primary" target="_blank" rel="noopener" style="width:100%;">
+              <span>Buka Rute Google Maps</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <h3 style="font-family:var(--font-display); font-size:18px; font-weight:600; color:var(--text-white); margin-bottom:18px;">Pertanyaan Umum</h3>
+
+          <div class="faq-item active">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)">
+              <span>Apakah harus booking online terlebih dahulu?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              Anda tetap bisa datang langsung (walk-in). Namun, pelanggan yang melakukan booking online mendapatkan prioritas antrean pengerjaan dan suku cadang telah disiapkan lebih dahulu.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)">
+              <span>Bagaimana cara kerja layanan Home Service?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              Mekanik kami akan datang ke alamat rumah atau kantor Anda dengan membawa peralatan servis lengkap dan suku cadang yang dibutuhkan. Layanan beroperasi setiap hari pukul 16:00 - 23:00 WIB.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)">
+              <span>Apakah ada garansi setelah pengerjaan servis?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              Ya. Setiap pengerjaan servis dan penggantian sparepart dilindungi garansi resmi bengkel untuk menjamin kepuasan dan rasa aman berkendara Anda.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)">
+              <span>Bagaimana estimasi biaya pengerjaan ditentukan?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer">
+              Mekanik melakukan pemeriksaan awal menyeluruh terhadap keluhan kendaraan Anda, kemudian kasir menerbitkan SPK estimasi biaya transparan (rincian suku cadang dan jasa) sebelum pengerjaan dimulai.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+            <span class="brand-name">FRDR GARAGE</span>
+          <p>
+            Bengkel motor modern dengan standar kerja presisi, suku cadang 100% original, transparansi biaya, dan kemudahan reservasi online.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Overview</a></li>
+            <li><a href="#layanan">Layanan Servis</a></li>
+            <li><a href="#keunggulan">Keunggulan</a></li>
+            <li><a href="#booking">Booking Online</a></li>
+            <li><a href="#lokasi">Workshop</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Workshop</h4>
+          <ul class="footer-links">
+            <li><span style="color:var(--text-white); font-weight:600;">WhatsApp:</span> <span id="footerShopPhone">-</span></li>
+            <li><span style="color:var(--text-white); font-weight:600;">Alamat:</span> <span id="footerShopAddress">-</span></li>
+            <li><span style="color:var(--primary-on-dark); font-weight:600;">Home Service:</span> 16:00 - 23:00 WIB</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 FRDR Garage. Seluruh hak cipta dilindungi.
+        </div>
+        <div style="color:var(--text-dim);">
+          Digital Workshop Ecosystem
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="javascript:void(0)" class="floating-wa-btn" id="floatingWaBtn" target="_blank" rel="noopener" aria-label="Konsultasi WhatsApp">
+    💬
+  </a>
+
+  <!-- Firebase Compat & Public Engine Scripts -->
+  <script src="libs/firebase-app-compat.js"></script>
+  <script src="libs/firebase-auth-compat.js"></script>
+  <script src="libs/firebase-firestore-compat.js"></script>
+  <script src="js/booking-public.js"></script>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      if (item) item.classList.toggle('active');
+    }
+
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobileNav');
+      if (nav) nav.classList.toggle('open');
+    }
+
+    function closeMobileNav() {
+      const nav = document.getElementById('mobileNav');
+      if (nav) nav.classList.remove('open');
+    }
+
+    function quickSelectService(serviceName) {
+      const comp = document.getElementById('bookingComplaint');
+      if (comp) {
+        comp.value = `Rencana Servis: ${serviceName}. `;
+        comp.focus();
+      }
+      const bookingSec = document.getElementById('booking');
+      if (bookingSec) {
+        bookingSec.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function quickSelectHomeService() {
+      const switchEl = document.getElementById('bookingTypeSwitch');
+      if (switchEl) {
+        const homeBtn = switchEl.querySelector('[data-type="home_service"]');
+        if (homeBtn) homeBtn.click();
+      }
+      quickSelectService('Home Service (Panggilan ke Rumah)');
+    }
+  </script>
+</body>
+</html>
