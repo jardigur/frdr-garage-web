@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Admin Portal — FRDR Garage</title>
+  <link rel="icon" href="/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0c;
+      --card: #15181e;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: #1c2028;
+      --primary: #ff5722;
+      --primary-hover: #f4511e;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --success: #10b981;
+      --danger: #ef4444;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    /* Lock Screen */
+    #lockScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      width: 100%;
+      text-align: center;
+    }
+
+    .lock-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 25px rgba(255, 87, 34, 0.2);
+    }
+
+    .lock-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .lock-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .pin-input-group {
+      width: 100%;
+      max-width: 280px;
+      margin-bottom: 12px;
+    }
+
+    .pin-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 24px;
+      font-family: monospace;
+      letter-spacing: 8px;
+      text-align: center;
+      background: #111419;
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius);
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .pin-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(255, 87, 34, 0.25);
+    }
+
+    .pin-hint {
+      font-size: 12px;
+      color: #fbbf24;
+      margin-bottom: 24px;
+      background: rgba(251, 191, 36, 0.08);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(251, 191, 36, 0.2);
+    }
+
+    .btn-unlock {
+      width: 100%;
+      max-width: 280px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-unlock:active {
+      transform: scale(0.98);
+    }
+
+    /* Dashboard UI */
+    #dashboard {
+      display: none;
+      width: 100%;
+    }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .dash-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dash-brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+    }
+
+    .dash-title {
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .dash-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn-logout {
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .switch-wrap input {
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .input-group {
+      margin-bottom: 14px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 13px;
+      background: #0d0f13;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-field:focus {
+      border-color: var(--primary);
+    }
+
+    /* Link Item */
+    .link-item {
+      background: #0d0f13;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .link-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .link-item-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .link-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-icon {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .btn-icon:hover {
+      color: #fff;
+    }
+
+    .btn-icon.delete {
+      color: var(--danger);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Bottom sticky actions */
+    .sticky-bottom {
+      position: sticky;
+      bottom: 16px;
+      background: rgba(9, 10, 12, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 99;
+    }
+
+    .btn-save {
+      width: 100%;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--primary-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-save:active {
+      transform: scale(0.98);
+    }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+
+    .btn-add {
+      width: 100%;
+      padding: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(255, 87, 34, 0.1);
+      border: 1px dashed rgba(255, 87, 34, 0.4);
+      color: var(--primary);
+      border-radius: var(--radius);
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #10b981;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      z-index: 9999;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Lock Screen -->
+    <div id="lockScreen">
+      <img src="/logo.png" alt="FRDR" class="lock-logo">
+      <h1 class="lock-title">FRDR Garage Admin</h1>
+      <p class="lock-desc">Masukkan PIN untuk mengelola Bio Link &amp; Promo</p>
+      
+      <div class="pin-input-group">
+        <input type="password" id="pinInput" class="pin-input" maxlength="6" inputmode="numeric" placeholder="••••••" autocomplete="off" autofocus>
+      </div>
+      
+      <div class="pin-hint">Hint: Tanggal diciptakan Alana</div>
+      
+      <button class="btn-unlock" id="btnUnlock" onclick="handleUnlock()">Masuk Portal</button>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="dashboard">
+      <div class="dash-header">
+        <div class="dash-brand">
+          <img src="/logo.png" alt="FRDR">
+          <div>
+            <div class="dash-title">FRDR Portal Admin</div>
+            <div class="dash-sub">Kelola Bio Link &amp; Pengumuman</div>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="handleLogout()">Kunci PIN</button>
+      </div>
+
+      <!-- Banner Promo -->
+      <div class="card">
+        <div class="card-title">
+          <span>Banner Pengumuman / Promo</span>
+          <label class="switch-wrap">
+            <input type="checkbox" id="bannerEnabled">
+            <span>Aktifkan</span>
+          </label>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Teks Pengumuman</label>
+          <input type="text" id="bannerText" class="input-field" placeholder="Contoh: Diskon Servis 15% Spesial Akhir Pekan!">
+        </div>
+        <div class="input-group" style="margin-bottom:0;">
+          <label class="input-label">Tautan Banner (Opsional)</label>
+          <input type="url" id="bannerLink" class="input-field" placeholder="https://frdrgarage.com/#booking">
+        </div>
+      </div>
+
+      <!-- Links Manager -->
+      <div class="card">
+        <div class="card-title">
+          <span>Daftar Tautan Bio Link</span>
+        </div>
+        
+        <div id="linksContainer"></div>
+
+        <button type="button" class="btn-add" onclick="addNewLink()">+ Tambah Tautan Baru</button>
+      </div>
+
+      <!-- Bottom Sticky Controls -->
+      <div class="sticky-bottom">
+        <button type="button" class="btn-save" id="btnSave" onclick="saveToFirestore()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          Simpan ke Cloud
+        </button>
+        <a href="/link" target="_blank" class="btn-secondary">Lihat Halaman Bio Link ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast">Tersimpan ke Cloud!</div>
+
+  <!-- Firebase SDKs -->
+  <script src="/libs/firebase-app-compat.js"></script>
+  <script src="/libs/firebase-firestore-compat.js"></script>
+
+  <script>
+    const CORRECT_PIN = "151026";
+    const FIREBASE_CONFIG = {
+      apiKey: ***
+      authDomain: "kasir-bengkel-b1265.firebaseapp.com",
+      projectId: "kasir-bengkel-b1265",
+      storageBucket: "kasir-bengkel-b1265.firebasestorage.app",
+      messagingSenderId: "965227241284",
+      appId: "1:965227241284:web:c9d0bbd99353f719724111"
+    };
+
+    let db = null;
+    let linksData = [];
+
+    const defaultLinks = [
+      {
+        id: 'booking',
+        title: 'BOOKING SERVIS ONLINE',
+        subtitle: 'Reservasi slot servis & cek antrean bengkel',
+        url: 'https://frdrgarage.com/#booking',
+        icon: 'calendar',
+        featured: true,
+        active: true
+      },
+      {
+        id: 'wa',
+        title: 'WHATSAPP OFFICIAL',
+        subtitle: '+62 881-0123-68222 • Konsultasi Servis & Part',
+        url: 'https://wa.me/62881012368222?text=Halo%20FRDR%20Garage%2C%20saya%20ingin%20konsultasi%20mengenai%20servis%2Fpart.',
+        icon: 'whatsapp',
+        featured: false,
+        active: true
+      },
+      {
+        id: 'tiktok',
+        title: 'TIKTOK RESMI',
+        subtitle: '@frdr.garage • Konten harian & hasil modifikasi',
+        url: 'https://www.tiktok.com/@frdr.garage',
+        icon: 'tiktok',
+        featured: false,
+        active: true
+      },
+      {
+        id: 'instagram',
+        title: 'INSTAGRAM',
+        subtitle: '@frdrgarage • Portofolio restorasi & repaint',
+        url: 'https://www.instagram.com/frdrgarage',
+        icon: 'instagram',
+        featured: false,
+        active: true
+      },
+      {
+        id: 'maps',
+        title: 'LOKASI WORKSHOP',
+        subtitle: 'Sleman, D.I. Yogyakarta • Jam Buka & Rute',
+        url: 'https://frdrgarage.com/#contact',
+        icon: 'location',
+        featured: false,
+        active: true
+      }
+    ];
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function handleUnlock() {
+      const pin = document.getElementById('pinInput').value.trim();
+      if (pin === CORRECT_PIN) {
+        sessionStorage.setItem('frdr_admin_auth', '1');
+        document.getElementById('lockScreen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        initFirebase();
+      } else {
+        alert('PIN Salah. Coba ingat hint-nya!');
+        document.getElementById('pinInput').value = '';
+        document.getElementById('pinInput').focus();
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('frdr_admin_auth');
+      window.location.reload();
+    }
+
+    document.getElementById('pinInput').addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') handleUnlock();
+    });
+
+    if (sessionStorage.getItem('frdr_admin_auth') === '1') {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      window.addEventListener('DOMContentLoaded', initFirebase);
+    }
+
+    function initFirebase() {
+      try {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(FIREBASE_CONFIG);
+        }
+        db = firebase.firestore();
+        db.settings({ experimentalAutoDetectLongPolling: true, useFetchStreams: false });
+        loadFromFirestore();
+      } catch (err) {
+        console.error('Firebase error:', err);
+        renderLinks(defaultLinks);
+      }
+    }
+
+    async function loadFromFirestore() {
+      if (!db) return;
+      try {
+        const doc = await db.collection('meta').doc('bioLinks').get();
+        if (doc.exists) {
+          const data = doc.data();
+          if (data.banner) {
+            document.getElementById('bannerEnabled').checked = !!data.banner.enabled;
+            document.getElementById('bannerText').value = data.banner.text || '';
+            document.getElementById('bannerLink').value = data.banner.link || '';
+          }
+          if (data.links && Array.isArray(data.links)) {
+            linksData = data.links;
+          } else {
+            linksData = [...defaultLinks];
+          }
+        } else {
+          linksData = [...defaultLinks];
+        }
+      } catch (e) {
+        console.warn('Load Firestore failed, using defaults:', e);
+        linksData = [...defaultLinks];
+      }
+      renderLinks(linksData);
+    }
+
+    function renderLinks(list) {
+      linksData = list;
+      const c = document.getElementById('linksContainer');
+      c.innerHTML = '';
+      list.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'link-item';
+        div.innerHTML = `
+          <div class="link-item-header">
+            <span class="link-item-num">#${idx + 1} • ${escapeHtml(item.title || 'Link')}</span>
+            <div class="link-actions">
+              <button type="button" class="btn-icon" title="Geser ke atas" onclick="moveLink(${idx}, -1)">▲</button>
+              <button type="button" class="btn-icon" title="Geser ke bawah" onclick="moveLink(${idx}, 1)">▼</button>
+              <button type="button" class="btn-icon delete" title="Hapus" onclick="deleteLink(${idx})">✕</button>
+            </div>
+          </div>
+          <div class="grid-2" style="margin-bottom:8px;">
+            <label class="switch-wrap">
+              <input type="checkbox" onchange="updateItem(${idx}, 'active', this.checked)" ${item.active ? 'checked' : ''}>
+              <span>Tampilkan Link</span>
+            </label>
+            <label class="switch-wrap">
+              <input type="checkbox" onchange="updateItem(${idx}, 'featured', this.checked)" ${item.featured ? 'checked' : ''}>
+              <span>Highlight (Featured)</span>
+            </label>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Judul Tombol</label>
+            <input type="text" class="input-field" value="${escapeHtml(item.title || '')}" oninput="updateItem(${idx}, 'title', this.value)">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Subjudul / Deskripsi Singkat</label>
+            <input type="text" class="input-field" value="${escapeHtml(item.subtitle || '')}" oninput="updateItem(${idx}, 'subtitle', this.value)">
+          </div>
+          <div class="grid-2">
+            <div class="input-group" style="margin-bottom:0;">
+              <label class="input-label">Ikon</label>
+              <select class="input-field" onchange="updateItem(${idx}, 'icon', this.value)">
+                <option value="calendar" ${item.icon === 'calendar' ? 'selected' : ''}>📅 Booking/Kalender</option>
+                <option value="whatsapp" ${item.icon === 'whatsapp' ? 'selected' : ''}>💬 WhatsApp</option>
+                <option value="tiktok" ${item.icon === 'tiktok' ? 'selected' : ''}>🎵 TikTok</option>
+                <option value="instagram" ${item.icon === 'instagram' ? 'selected' : ''}>📷 Instagram</option>
+                <option value="location" ${item.icon === 'location' ? 'selected' : ''}>📍 Lokasi / Maps</option>
+                <option value="link" ${item.icon === 'link' ? 'selected' : ''}>🔗 Tautan Umum</option>
+              </select>
+            </div>
+            <div class="input-group" style="margin-bottom:0;">
+              <label class="input-label">URL Tujuan</label>
+              <input type="url" class="input-field" value="${escapeHtml(item.url || '')}" oninput="updateItem(${idx}, 'url', this.value)">
+            </div>
+          </div>
+        `;
+        c.appendChild(div);
+      });
+    }
+
+    function updateItem(idx, key, val) {
+      if (linksData[idx]) {
+        linksData[idx][key] = val;
+      }
+    }
+
+    function moveLink(idx, dir) {
+      const target = idx + dir;
+      if (target < 0 || target >= linksData.length) return;
+      const tmp = linksData[idx];
+      linksData[idx] = linksData[target];
+      linksData[target] = tmp;
+      renderLinks(linksData);
+    }
+
+    function deleteLink(idx) {
+      if (confirm('Yakin ingin menghapus tautan ini?')) {
+        linksData.splice(idx, 1);
+        renderLinks(linksData);
+      }
+    }
+
+    function addNewLink() {
+      linksData.push({
+        id: 'link_' + Date.now(),
+        title: 'Tautan Baru',
+        subtitle: 'Deskripsi tautan',
+        url: 'https://',
+        icon: 'link',
+        featured: false,
+        active: true
+      });
+      renderLinks(linksData);
+    }
+
+    async function saveToFirestore() {
+      if (!db) {
+        alert('Gagal terhubung ke database. Muat ulang halaman.');
+        return;
+      }
+      const btn = document.getElementById('btnSave');
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+
+      const payload = {
+        banner: {
+          enabled: document.getElementById('bannerEnabled').checked,
+          text: document.getElementById('bannerText').value.trim(),
+          link: document.getElementById('bannerLink').value.trim()
+        },
+        links: linksData,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      try {
+        await db.collection('meta').doc('bioLinks').set(payload, { merge: true });
+        showToast('Tersimpan! Bio link langsung terupdate.');
+      } catch (err) {
+        console.error('Save error:', err);
+        alert('Gagal menyimpan ke Firestore: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
