@@ -409,16 +409,17 @@
 
   <!-- Firebase Integration -->
   <script src="/libs/firebase-app-compat.js"></script>
+  <script src="/libs/firebase-auth-compat.js"></script>
   <script src="/libs/firebase-firestore-compat.js"></script>
   <script>
     const FIREBASE_CONFIG = {
-      apiKey: ***
-      authDomain: "kasir-bengkel-b1265.firebaseapp.com",
-      projectId: "kasir-bengkel-b1265",
-      storageBucket: "kasir-bengkel-b1265.firebasestorage.app",
-      messagingSenderId: "965227241284",
-      appId: "1:965227241284:web:c9d0bbd99353f719724111"
-    };
+  apiKey: "AIzaSyArvWKgTasNsqbtA_9JOJWv6CPvKVOQfhU",
+  authDomain: "kasir-bengkel-b1265.firebaseapp.com",
+  projectId: "kasir-bengkel-b1265",
+  storageBucket: "kasir-bengkel-b1265.firebasestorage.app",
+  messagingSenderId: "965227241284",
+  appId: "1:965227241284:web:c9d0bbd99353f719724111"
+};
 
     const ICONS = {
       calendar: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`,
@@ -429,23 +430,27 @@
       link: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`
     };
 
-    function initFirebase() {
+    async function initFirebase() {
       try {
         if (!firebase.apps.length) {
           firebase.initializeApp(FIREBASE_CONFIG);
         }
         const db = firebase.firestore();
         db.settings({ experimentalAutoDetectLongPolling: true, useFetchStreams: false });
-
-        db.collection('meta').doc('bioLinks').onSnapshot((doc) => {
+        try {
+          await firebase.auth().signInAnonymously();
+        } catch(authErr) {
+          console.warn("Auth anonim:", authErr);
+        }
+        db.collection("meta").doc("bioLinks").onSnapshot((doc) => {
           if (doc.exists) {
             renderDynamic(doc.data());
           }
         }, (err) => {
-          console.warn('Realtime sync offline, using defaults:', err);
+          console.warn("Realtime sync offline, using defaults:", err);
         });
       } catch (err) {
-        console.warn('Firebase init error:', err);
+        console.warn("Firebase init error:", err);
       }
     }
 

@@ -466,18 +466,19 @@
 
   <!-- Firebase SDKs -->
   <script src="/libs/firebase-app-compat.js"></script>
+  <script src="/libs/firebase-auth-compat.js"></script>
   <script src="/libs/firebase-firestore-compat.js"></script>
 
   <script>
     const CORRECT_PIN = "151026";
     const FIREBASE_CONFIG = {
-      apiKey: ***
-      authDomain: "kasir-bengkel-b1265.firebaseapp.com",
-      projectId: "kasir-bengkel-b1265",
-      storageBucket: "kasir-bengkel-b1265.firebasestorage.app",
-      messagingSenderId: "965227241284",
-      appId: "1:965227241284:web:c9d0bbd99353f719724111"
-    };
+  apiKey: "AIzaSyArvWKgTasNsqbtA_9JOJWv6CPvKVOQfhU",
+  authDomain: "kasir-bengkel-b1265.firebaseapp.com",
+  projectId: "kasir-bengkel-b1265",
+  storageBucket: "kasir-bengkel-b1265.firebasestorage.app",
+  messagingSenderId: "965227241284",
+  appId: "1:965227241284:web:c9d0bbd99353f719724111"
+};
 
     let db = null;
     let linksData = [];
@@ -566,16 +567,21 @@
       window.addEventListener('DOMContentLoaded', initFirebase);
     }
 
-    function initFirebase() {
+    async function initFirebase() {
       try {
         if (!firebase.apps.length) {
           firebase.initializeApp(FIREBASE_CONFIG);
         }
         db = firebase.firestore();
         db.settings({ experimentalAutoDetectLongPolling: true, useFetchStreams: false });
-        loadFromFirestore();
+        try {
+          await firebase.auth().signInAnonymously();
+        } catch(authErr) {
+          console.warn("Auth anonim:", authErr);
+        }
+        await loadFromFirestore();
       } catch (err) {
-        console.error('Firebase error:', err);
+        console.error("Firebase error:", err);
         renderLinks(defaultLinks);
       }
     }
